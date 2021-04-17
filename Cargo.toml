@@ -7,3 +7,16 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+tokio = {version = "1.5.0", features = ["signal", "rt"]}
+redbpf = { git = "https://github.com/foniod/redbpf.git", branch = "main" }
+redbpf-macros = { git = "https://github.com/foniod/redbpf.git", branch = "main", optional = true}
+redbpf-probes = { git = "https://github.com/foniod/redbpf.git", branch = "main", optional = true}
+
+[features]
+default = []
+probes = ["redbpf-macros", "redbpf-probes"]
+
+[[bin]]
+name = "redirect"
+path = "src/xdp/redirect.rs"
+required-features = ["probes"]
