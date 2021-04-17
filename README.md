@@ -5,7 +5,7 @@ This project was inspired by
 I was able to get the redirection filter working pretty cleanly in C, but I wanted to replicate
 the functionality in Rust with [RedBPF](https://github.com/foniod/redbpf). I ended up basing the project
 structure on [aquarhead/protect-the-rabbit](https://github.com/aquarhead/protect-the-rabbit), with some
-modifications.
+modifications per [this blog](https://kbknapp.dev/ebpf-part-iii/).
 
 # Requirements
 
