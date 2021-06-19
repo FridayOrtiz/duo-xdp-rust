@@ -1,4 +1,4 @@
-use redbpf::{xdp, Module};
+use redbpf::{Module, xdp};
 use std::error::Error;
 use tokio::runtime;
 use tokio::signal::ctrl_c;
@@ -9,19 +9,17 @@ fn main() -> Result<(), Box<dyn Error>> {
         .build()
         .unwrap();
     rt.block_on(async {
-        let prog = include_bytes!("../target/bpf/programs/drop_isn/drop_isn.elf");
+        let prog = include_bytes!("../target/bpf/programs/redirect/redirect.elf");
         let mut module = Module::parse(prog).expect("error parsing BPF code");
 
         for program in module.programs.iter_mut() {
             println!("Loading program: {}", program.name());
-            program
-                .load(module.version, module.license.clone())
-                .unwrap()
+            program.load(module.version, module.license.clone()).unwrap()
         }
 
         for prog in module.xdps_mut() {
             println!("Attaching XDP: {}", prog.name());
-            prog.attach_xdp("enp8s0", xdp::Flags::default())
+            prog.attach_xdp("lo", xdp::Flags::default())
                 .expect("Failed to attach program");
         }
 

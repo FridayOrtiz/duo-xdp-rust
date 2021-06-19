@@ -2,11 +2,11 @@
 description = "Build XDP program"
 install_crate_args = ["cargo-bpf", "--git", "https://github.com/foniod/redbpf.git"]
 command = "cargo"
-args = ["bpf", "build", "drop_isn"]
+args = ["bpf", "build", "redirect"]
 
 [tasks.bpf]
 command = "llvm-strip-10"
-args = ["-R", ".text", "target/bpf/programs/drop_isn/drop_isn.elf"]
+args = ["-R", ".text", "target/bpf/programs/redirect/redirect.elf"]
 dependencies = ["build_xdp"]
 
 [tasks.release]
