@@ -17,6 +17,6 @@ default = []
 probes = ["redbpf-macros", "redbpf-probes"]
 
 [[bin]]
-name = "redirect"
-path = "src/xdp/redirect.rs"
+name = "drop_isn"
+path = "src/xdp/drop_isn.rs"
 required-features = ["probes"]
